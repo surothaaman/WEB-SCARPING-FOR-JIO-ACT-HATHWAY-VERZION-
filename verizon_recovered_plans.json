@@ -1,0 +1,69 @@
+{
+  "provider": "Verizon",
+  "inspector_revision": "verizon-sales-cards-fix-6",
+  "service_type": "residential_home_internet",
+  "address": "1393 Lincoln Pl, Brooklyn, NY 11213, USA",
+  "status": "unit_confirmation_required",
+  "service_available": null,
+  "plans": [
+    {
+      "name": "5G Home Ultimate",
+      "monthly_price_usd": 75.0,
+      "mobile_bundle_price_usd": 60.0,
+      "broadband_label_monthly_price_usd": 85.0,
+      "speed": "300 Mbps",
+      "typical_download_speed": "85 - 250 Mbps",
+      "billing_period": "Monthly",
+      "price_conditions": "Plan prices include taxes & fees. Discounted pricing with Auto Pay & paper-free billing. $10/mo more without Auto Pay ($5/mo more for WiFi Backup plan). Additional $15/mo Mobile + Home discount ($5/mo for WiFi Backup plan) on Verizon Home Internet available when combined with any Verizon postpaid mobile phone plan (excludes business & data-only plans). Subject to credit approval.",
+      "address_confirmed": false,
+      "raw_text": "5G Home Ultimate\n$ 75 per month\n$75/mo\u00a0*\nAs low as $ 60 per month\nAs low as\u00a0$60/mo\n\nUp to 300 Mbps download speeds\n\nTypical speeds of 85 - 250 Mbps\n\nUnlimited premium data\n\nUltra HD 4K video streaming\n\nRouter + Whole-Home Wi-Fi included\n\n1 Wi-Fi Extender for more reliable coverage\nFree router upgrade after 3 years ($50 value)\n\nFree professional setup\n\nFor a limited time, on us ($99 value)\nEasy self setup, always available\n\nReview details\nSpecial gifts, on us\nIncluded with this plan:\nDisney+, Hulu, & ESPN+ (With Ads) perk for 12 months.1\nA $144.00 value.\nDetails\nAnd\nGoogle AI Pro perk for 6 months.2\nA $60.00 value.\nDetails\nYou can redeem some extras as soon as you activate service and others require a waiting period. Please refer to your offer Terms and Conditions.\nSelect\nTwo Months on Us"
+    },
+    {
+      "name": "5G Home Plus",
+      "monthly_price_usd": 60.0,
+      "mobile_bundle_price_usd": 45.0,
+      "broadband_label_monthly_price_usd": 70.0,
+      "speed": "150 Mbps",
+      "typical_download_speed": "50 - 100 Mbps",
+      "billing_period": "Monthly",
+      "price_conditions": "Plan prices include taxes & fees. Discounted pricing with Auto Pay & paper-free billing. $10/mo more without Auto Pay ($5/mo more for WiFi Backup plan). Additional $15/mo Mobile + Home discount ($5/mo for WiFi Backup plan) on Verizon Home Internet available when combined with any Verizon postpaid mobile phone plan (excludes business & data-only plans). Subject to credit approval.",
+      "address_confirmed": false,
+      "raw_text": "5G Home Plus\n$ 60 per month\n$60/mo\u00a0*\nAs low as $ 45 per month\nAs low as\u00a0$45/mo\n\nUp to 150 Mbps download speeds\n\nTypical speeds of 50 - 100 Mbps\n\nUnlimited premium data\n\n1080p HD video streaming\n\nRouter included\n\nFree professional setup\n\nFor a limited time, on us ($99 value)\nEasy self setup, always available\n\nReview details\nSpecial gifts, on us\nIncluded with this plan:\nGoogle AI Pro perk for 6 months.2\nA $60.00 value.\nDetails\nYou can redeem some extras as soon as you activate service and others require a waiting period. Please refer to your offer Terms and Conditions.\nSelect\nTwo Months on Us"
+    },
+    {
+      "name": "5G Home",
+      "monthly_price_usd": 50.0,
+      "mobile_bundle_price_usd": 35.0,
+      "broadband_label_monthly_price_usd": 60.0,
+      "speed": "100 Mbps",
+      "typical_download_speed": "25 - 85 Mbps",
+      "billing_period": "Monthly",
+      "price_conditions": "Plan prices include taxes & fees. Discounted pricing with Auto Pay & paper-free billing. $10/mo more without Auto Pay ($5/mo more for WiFi Backup plan). Additional $15/mo Mobile + Home discount ($5/mo for WiFi Backup plan) on Verizon Home Internet available when combined with any Verizon postpaid mobile phone plan (excludes business & data-only plans). Subject to credit approval.",
+      "address_confirmed": false,
+      "raw_text": "5G Home\n$ 50 per month\n$50/mo\u00a0*\nAs low as $ 35 per month\nAs low as\u00a0$35/mo\n\nUp to 100 Mbps download speeds\n\nTypical speeds of 25 - 85 Mbps\n\nUnlimited data\n\n1080p HD video streaming\n\nRouter included\n\nFree professional setup\n\nFor a limited time, on us ($99 value)\nEasy self setup, always available\n\nReview details\nSpecial gifts, on us\nIncluded with this plan:\nGoogle AI Pro perk for 6 months.2\nA $60.00 value.\nDetails\nYou can redeem some extras as soon as you activate service and others require a waiting period. Please refer to your offer Terms and Conditions.\nSelect"
+    }
+  ],
+  "currency": "USD",
+  "source_url": "https://www.verizon.com/sales/home/progressiveplan.html",
+  "wait_seconds": 90,
+  "message": "Verizon resolved this lookup to 1393 Lincoln Pl,apt Front Flr 1, Brooklyn, NY, 11213. Confirm the apartment/unit before treating these plans as available for your home.",
+  "geolocation_permission": "denied",
+  "stage": "plans_recovered_from_capture",
+  "address_field_filled": true,
+  "address_field_value": "1393 Lincoln Pl, Brooklyn, NY 11213, USA",
+  "selected_address": "1393 Lincoln PL, Brooklyn, Ny, 11213, USA",
+  "result_route": "/sales/home/progressiveplan.html",
+  "browser_events": [
+    "new page opened: about:blank",
+    "new page opened: https://telemetry.us.transcend.io/collect",
+    "new page opened: https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g",
+    "page closed",
+    "active page closed",
+    "browser disconnected"
+  ],
+  "checked_at": "2026-10-23T11:03:22.508183+00:00",
+  "elapsed_seconds": 102.22,
+  "resolved_address": "1393 Lincoln Pl,apt Front Flr 1, Brooklyn, NY, 11213",
+  "recovered_from_capture": "verizon-latest.zip / verizon_page_text.txt",
+  "recovered_at": "2026-10-23T11:13:45.683328+00:00"
+}

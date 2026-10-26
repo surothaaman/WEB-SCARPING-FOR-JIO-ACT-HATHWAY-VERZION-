@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Signal — Broadband comparison</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5f7fa;
+        color: #17263c;
+        font:
+          15px system-ui,
+          sans-serif;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      header {
+        background: #14283e;
+        color: white;
+        padding: 22px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .brand {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .brand span {
+        color: #76e0bd;
+      }
+      .tag {
+        color: #b7c8d8;
+        font-size: 13px;
+      }
+      main {
+        max-width: 1320px;
+        margin: auto;
+        padding: 42px 28px;
+      }
+      h1 {
+        font-size: 38px;
+        letter-spacing: -1.5px;
+        margin: 10px 0;
+      }
+      p {
+        line-height: 1.6;
+        color: #647187;
+      }
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: #168369;
+      }
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+      .refresh {
+        background: white;
+        border: 1px solid #d6dee6;
+        border-radius: 10px;
+        padding: 12px 18px;
+      }
+      .notice {
+        background: #fff6df;
+        border: 1px solid #ead6a5;
+        padding: 13px 16px;
+        border-radius: 10px;
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 18px 0;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 24px 0;
+      }
+      .stat {
+        background: white;
+        border: 1px solid #e0e6ed;
+        padding: 20px;
+        border-radius: 13px;
+      }
+      .stat strong {
+        font-size: 28px;
+        display: block;
+      }
+      .stat span {
+        font-size: 13px;
+        color: #647187;
+      }
+      .workspace {
+        display: grid;
+        grid-template-columns: 235px 1fr;
+        gap: 24px;
+      }
+      .filters {
+        background: white;
+        border: 1px solid #e0e6ed;
+        padding: 22px;
+        border-radius: 13px;
+        align-self: start;
+      }
+      .filters h3 {
+        margin: 0 0 24px;
+      }
+      .filters label {
+        display: block;
+        margin: 18px 0 8px;
+        font-size: 13px;
+        font-weight: 650;
+      }
+      .filters input,
+      .filters select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d7e0e9;
+        border-radius: 7px;
+        background: white;
+      }
+      .results-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .results-top select {
+        padding: 10px;
+        border: 1px solid #d7e0e9;
+        background: white;
+        border-radius: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: white;
+        border: 1px solid #dfe6ed;
+        border-radius: 14px;
+        padding: 23px;
+        position: relative;
+      }
+      .card.selected {
+        border: 2px solid #168369;
+        padding: 22px;
+      }
+      .provider {
+        display: inline-block;
+        padding: 5px 9px;
+        background: #edf3ff;
+        color: #355eaf;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 750;
+      }
+      .provider.ACT {
+        background: #ffedf0;
+        color: #c33451;
+      }
+      .provider.Hathway {
+        background: #fff3e5;
+        color: #a76319;
+      }
+      .card h3 {
+        font-size: 18px;
+        min-height: 44px;
+        margin: 16px 0 4px;
+      }
+      .price {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .price small {
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: #647187;
+      }
+      .speed {
+        font-size: 17px;
+        font-weight: 750;
+        border-top: 1px solid #edf0f5;
+        margin-top: 18px;
+        padding-top: 16px;
+      }
+      .detail {
+        font-size: 12px;
+        color: #68768a;
+        margin: 8px 0;
+        line-height: 1.6;
+      }
+      .choose {
+        border: 1px solid #cbd8e1;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        margin-top: 16px;
+        color: #23473f;
+        font-weight: 650;
+      }
+      .selected .choose {
+        background: #168369;
+        color: white;
+        border-color: #168369;
+      }
+      .empty {
+        padding: 40px;
+        background: white;
+        border-radius: 12px;
+        grid-column: 1/-1;
+      }
+      #errors {
+        color: #9b3540;
+        line-height: 1.7;
+      }
+      #compare {
+        margin-top: 36px;
+        background: white;
+        border: 1px solid #dfe6ed;
+        border-radius: 14px;
+        padding: 24px;
+        overflow: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 600px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 16px 12px;
+        border-bottom: 1px solid #e6ebf0;
+        vertical-align: top;
+        font-size: 13px;
+      }
+      th {
+        background: #f5f8fa;
+      }
+      a {
+        color: #168369;
+      }
+      .pill {
+        border: 0;
+        background: #eaf5ef;
+        color: #16735d;
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+      footer {
+        margin-top: 28px;
+        color: #7b8796;
+        font-size: 12px;
+      }
+      .status {
+        font-size: 12px;
+        color: #b7c8d8;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #49b8e0;
+        outline-offset: 3px;
+      }
+      @media (max-width: 850px) {
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+        .filters {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0 15px;
+        }
+        .filters h3 {
+          grid-column: 1/-1;
+          margin-bottom: 0;
+        }
+        .hero {
+          align-items: flex-start;
+        }
+        h1 {
+          font-size: 30px;
+        }
+      }
+      @media (max-width: 560px) {
+        main {
+          padding: 28px 16px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          gap: 8px;
+        }
+        .stat {
+          padding: 13px;
+        }
+        .stat strong {
+          font-size: 23px;
+        }
+        .hero {
+          display: block;
+        }
+        .tag {
+          display: none;
+        }
+        .results-top {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      .verizon-panel {
+        background: #fff;
+        border: 1px solid #dfe6ed;
+        border-radius: 14px;
+        padding: 22px;
+        margin: 22px 0;
+      }
+      .verizon-form {
+        display: grid;
+        grid-template-columns: minmax(220px, 2fr) minmax(130px, 1fr) auto auto;
+        align-items: end;
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .verizon-form label {
+        display: block;
+        font-size: 13px;
+        font-weight: 650;
+        margin-bottom: 7px;
+      }
+      .verizon-form input {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #d7e0e9;
+        border-radius: 7px;
+      }
+      .verizon-result {
+        border-top: 1px solid #edf0f5;
+        padding-top: 14px;
+      }
+      .verizon-status {
+        display: inline-block;
+        border-radius: 20px;
+        padding: 5px 10px;
+        background: #edf3ff;
+        color: #355eaf;
+        font-size: 12px;
+        font-weight: 750;
+        text-transform: capitalize;
+      }
+      .verizon-plans {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .verizon-plan {
+        border: 1px solid #dfe6ed;
+        border-radius: 10px;
+        padding: 15px;
+      }
+      .verizon-plan strong { display: block; margin: 6px 0; }
+      .verizon-muted { color: #647187; font-size: 12px; }
+      @media (max-width: 850px) {
+        .verizon-form { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 560px) {
+        .verizon-panel { padding: 16px; }
+        .verizon-form { grid-template-columns: 1fr; }
+      }
+
+      .hero {
+        background: linear-gradient(120deg, #e6f5f0, #eaf0fb);
+        padding: 32px;
+        border-radius: 20px;
+        border: 1px solid #d8e7e6;
+      }
+      .filters {
+        position: sticky;
+        top: 20px;
+      }
+      .card {
+        box-shadow: 0 4px 16px #17263c05;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px #17263c10;
+      }
+      .plan-extra {
+        border-top: 1px solid #edf0f5;
+        padding-top: 12px;
+        margin-top: 12px;
+        font-size: 12px;
+      }
+      .plan-extra summary {
+        cursor: pointer;
+        color: #168369;
+        font-weight: 650;
+      }
+      .plan-extra p {
+        font-size: 12px;
+      }
+      .db-panel {
+        background: white;
+        border: 1px solid #dfe6ed;
+        border-radius: 14px;
+        padding: 22px;
+        margin: 24px 0;
+      }
+      .db-panel summary {
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .db-path {
+        overflow-wrap: anywhere;
+        font-size: 12px;
+        background: #f4f7fa;
+        padding: 12px;
+        border-radius: 7px;
+      }
+      .db-panel table {
+        min-width: 0;
+      }
+      .tray {
+        position: sticky;
+        bottom: 16px;
+        background: #14283e;
+        color: white;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        box-shadow: 0 8px 30px #14283e30;
+        z-index: 2;
+      }
+      .tray[hidden] {
+        display: none;
+      }
+      .tray button {
+        background: #76e0bd;
+        border: 0;
+        border-radius: 7px;
+        padding: 10px 15px;
+        color: #14283e;
+        font-weight: 750;
+      }
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 850px) {
+        .filters {
+          position: static;
+        }
+      }
+      @media (max-width: 560px) {
+        .hero {
+          padding: 22px;
+        }
+        .db-panel {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        signal<span>.</span> <span class="tag"> / Broadband explorer</span>
+      </div>
+      <div class="status">
+        Chennai · Saved scraper data<br /><span id="last-sync"
+          >Waiting for database</span
+        >
+      </div>
+    </header>
+    <main>
+      <div class="hero">
+        <div>
+          <div class="eyebrow">FIND YOUR CONNECTION</div>
+          <h1>More clarity. Better broadband.</h1>
+          <p>
+            Explore Jio, Hathway and ACT. Select up to three plans to compare.
+          </p>
+        </div>
+        <button class="refresh" id="refresh">↻ Refresh saved plans</button>
+      </div>
+      <div class="notice">
+        Prices are advertised amounts. Billing period, taxes and minimum
+        subscription can differ. Unconfirmed periods are shown explicitly; these
+        amounts are not ranked as verified monthly costs. Jio's current records
+        do not confirm a city.
+      </div>
+      <section class="verizon-panel" aria-labelledby="verizon-title">
+        <div class="eyebrow">U.S. RESIDENTIAL INTERNET</div>
+        <h2 id="verizon-title">Check Verizon at an address</h2>
+        <p>Enter a home address to run the local browser check. Results and any candidate offers are saved in SQLite. An unconfirmed result is clearly marked for review.</p>
+        <form class="verizon-form" id="verizon-form">
+          <div><label for="verizon-address">Street address, city and state</label><input id="verizon-address" name="address" autocomplete="street-address" placeholder="8316 Strawberry Point Dr, Charlotte, NC" required minlength="5" /></div>
+          <div><label for="verizon-zip">ZIP code (optional)</label><input id="verizon-zip" name="zip_code" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" placeholder="28215" /></div>
+          <button class="refresh" id="verizon-submit" type="submit">Check address</button>
+          <button class="refresh" id="verizon-saved" type="button">Load saved result</button>
+        </form>
+        <div class="verizon-result" id="verizon-result" role="status" aria-live="polite">Enter an address to check Verizon residential home internet.</div>
+      </section>
+      <div class="toolbar">
+        <button class="refresh" id="export">Download saved plans CSV</button
+        ><button class="refresh" id="db-check">Check database</button>
+      </div>
+      <div id="errors" role="status" aria-live="polite"></div>
+      <div class="stats">
+        <div class="stat">
+          <strong id="plan-count">—</strong><span>Saved plans</span>
+        </div>
+        <div class="stat">
+          <strong id="provider-count">—</strong><span>Providers available</span>
+        </div>
+        <div class="stat">
+          <strong id="selected-count">0 / 3</strong
+          ><span>Selected to compare</span>
+        </div>
+      </div>
+      <details class="db-panel" id="db-panel">
+        <summary>Database storage & saved records</summary>
+        <div id="db-content"><p>Checking database…</p></div>
+      </details>
+      <div class="workspace">
+        <aside class="filters">
+          <h3>Refine your search</h3>
+          <div>
+            <label for="provider">Provider</label
+            ><select id="provider">
+              <option value="">All providers</option>
+              <option>ACT</option>
+              <option>Hathway</option>
+              <option>JioFiber</option>
+            </select>
+          </div>
+          <div>
+            <label for="search">Search plans</label
+            ><input id="search" placeholder="Pack, provider or speed" />
+          </div>
+          <div>
+            <label for="speed">Minimum speed</label
+            ><select id="speed">
+              <option value="0">Any speed</option>
+              <option value="50">50 Mbps</option>
+              <option value="100">100 Mbps</option>
+              <option value="200">200 Mbps</option>
+              <option value="500">500 Mbps</option>
+              <option value="1000">1 Gbps</option>
+            </select>
+          </div>
+          <div>
+            <label for="budget">Max advertised price (₹)</label
+            ><input id="budget" type="number" min="0" placeholder="No limit" />
+          </div>
+          <div>
+            <label for="reset">Start fresh</label
+            ><button class="refresh" id="reset">Reset filters</button>
+          </div>
+        </aside>
+        <section>
+          <div class="results-top">
+            <strong id="result-count" aria-live="polite"
+              >Loading saved plans…</strong
+            ><select id="sort" aria-label="Sort plans">
+              <option value="provider">Provider & price</option>
+              <option value="price">Advertised price: low to high</option>
+              <option value="speed">Speed: high to low</option>
+            </select>
+          </div>
+          <div class="grid" id="grid"></div>
+        </section>
+      </div>
+      <div class="tray" id="tray" hidden>
+        <span id="tray-label"></span
+        ><button id="jump-compare">Compare selected ↓</button>
+      </div>
+      <section id="compare" hidden>
+        <div class="results-top">
+          <h2>Your comparison</h2>
+          <button class="refresh" id="clear">Clear selection</button>
+        </div>
+        <div id="comparison-table"></div>
+      </section>
+      <footer>
+        Auto-refreshes saved records every 5 seconds while this tab is visible.
+        Capture time is the last successful database save; database check time
+        is shown separately. Refreshing does not run the scrapers.
+      </footer>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let plans = [],
+        selected = new Set(),
+        loading = false;
+      let verizonResult = null;
+      const cachedSources = new Map();
+      const esc = (v) =>
+        String(v ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const money = (n) =>
+        n === null
+          ? "Price unavailable"
+          : "₹" +
+            new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(
+              n,
+            );
+      function speedFrom(v) {
+        const m = String(v).match(/([\d.]+)\s*(Gbps|Mbps)/i);
+        return m
+          ? Number(m[1]) * (m[2].toLowerCase() === "gbps" ? 1000 : 1)
+          : null;
+      }
+      function priceFrom(v) {
+        const m = String(v).match(/(?:₹|INR|Rs\.?)[\s]*([\d,]+(?:\.\d+)?)/i);
+        return m ? Number(m[1].replaceAll(",", "")) : null;
+      }
+      function normalize(row, kind) {
+        const common = kind === "provider";
+        const conditions = Array.isArray(row.conditions) ? row.conditions : [];
+        return {
+          key: JSON.stringify([
+            kind,
+            row.provider,
+            row.city || "",
+            row.source_url,
+            conditions.find((c) => /^Pack:/i.test(c)) || "",
+            common ? row.advertised_price_paise : row.displayed_price,
+            common ? row.speed_mbps : row.data_and_speed,
+            row.billing_period || row.validity || "",
+          ]),
+          provider: row.provider,
+          name:
+            conditions
+              .find((c) => /^Pack:/i.test(c))
+              ?.replace(/^Pack:\s*/i, "") ||
+            (row.provider === "JioFiber" ? "JioFiber plan" : "Broadband plan"),
+          price: common
+            ? Number(row.advertised_price_paise) / 100
+            : priceFrom(row.displayed_price),
+          speed: common
+            ? Number(row.speed_mbps)
+            : speedFrom(row.data_and_speed),
+          period: common
+            ? row.billing_period || "Not confirmed"
+            : row.validity || "Not confirmed",
+          city: row.city || "Not confirmed",
+          conditions,
+          data: row.data_and_speed || "Not separately confirmed",
+          source: row.source_url,
+          date: row.scraped_at,
+        };
+      }
+      function sourceLink(url) {
+        try {
+          const u = new URL(url);
+          return ["https:", "http:"].includes(u.protocol)
+            ? `<a href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">Provider page ↗</a>`
+            : "Unavailable";
+        } catch {
+          return "Unavailable";
+        }
+      }
+      function render() {
+        const q = $("search").value.toLowerCase(),
+          budget = $("budget").value;
+        let visible = plans.filter(
+          (p) =>
+            (!$("provider").value || p.provider === $("provider").value) &&
+            (!q ||
+              `${p.name} ${p.provider} ${p.speed ?? ""}`
+                .toLowerCase()
+                .includes(q)) &&
+            (!$("speed").value ||
+              Number($("speed").value) === 0 ||
+              (p.speed !== null && p.speed >= Number($("speed").value))) &&
+            (budget === "" || (p.price !== null && p.price <= Number(budget))),
+        );
+        visible.sort((a, b) =>
+          $("sort").value === "speed"
+            ? (b.speed ?? -1) - (a.speed ?? -1)
+            : $("sort").value === "price"
+              ? (a.price ?? Infinity) - (b.price ?? Infinity)
+              : a.provider.localeCompare(b.provider) ||
+                (a.price ?? Infinity) - (b.price ?? Infinity),
+        );
+        $("result-count").textContent = `${visible.length} plans available`;
+        $("plan-count").textContent = plans.length;
+        $("provider-count").textContent = new Set(
+          plans.map((p) => p.provider),
+        ).size;
+        $("selected-count").textContent = `${selected.size} / 3`;
+        $("grid").innerHTML = visible.length
+          ? visible
+              .map(
+                (p) =>
+                  `<article class="card ${selected.has(p.key) ? "selected" : ""}"><span class="provider ${esc(p.provider)}">${esc(p.provider)}</span><h3>${esc(p.name)}</h3><div class="price">${money(p.price)} <small>advertised</small></div><div class="speed">${p.speed === null ? "Speed unavailable" : p.speed + " Mbps"}</div><div class="detail">Billing / validity: ${esc(p.period)}<br>City: ${esc(p.city)}<br>Captured: ${esc(p.date ? new Date(p.date).toLocaleString() : "Unknown")}</div><details class="plan-extra"><summary>Conditions & source</summary><p>${p.conditions.map(esc).join("<br>") || "No conditions recorded."}</p>${sourceLink(p.source)}</details><button class="choose" data-key="${esc(p.key)}" aria-pressed="${selected.has(p.key)}">${selected.has(p.key) ? "✓ Selected" : "＋ Compare plan"}</button></article>`,
+              )
+              .join("")
+          : '<div class="empty">No plans match. Try changing the filters, or run your scrapers if no data is saved.</div>';
+        const picked = plans.filter((p) => selected.has(p.key));
+        $("compare").hidden = !picked.length;
+        $("tray").hidden = !picked.length;
+        $("tray-label").textContent = picked.length + " of 3 plans selected";
+        const fields = [
+          ["Provider", (p) => esc(p.provider)],
+          ["Pack", (p) => esc(p.name)],
+          ["Advertised price", (p) => money(p.price)],
+          ["Speed", (p) => (p.speed === null ? "Unknown" : p.speed + " Mbps")],
+          ["Billing / validity", (p) => esc(p.period)],
+          ["City", (p) => esc(p.city)],
+          ["Data / speed text", (p) => esc(p.data)],
+          [
+            "Conditions",
+            (p) => p.conditions.map(esc).join("<br>") || "Not recorded",
+          ],
+          ["Source", (p) => sourceLink(p.source)],
+        ];
+        $("comparison-table").innerHTML =
+          `<table><thead><tr><th>Plan details</th>${picked.map((p) => `<th>${esc(p.provider)}<br><button class="pill" data-key="${esc(p.key)}">Remove</button></th>`).join("")}</tr></thead><tbody>${fields.map(([label, fn]) => `<tr><th scope="row">${label}</th>${picked.map((p) => `<td>${fn(p)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+      }
+      async function load() {
+        if (loading) return;
+        loading = true;
+        $("refresh").disabled = true;
+        try {
+          const endpoints = ["/plans/jio", "/plans/hathway", "/plans/act"];
+          const results = await Promise.allSettled(
+            endpoints.map(async (endpoint) => {
+              const response = await fetch(endpoint, {
+                cache: "no-store",
+                signal: AbortSignal.timeout(15000),
+              });
+              if (!response.ok)
+                throw Error(endpoint + " HTTP " + response.status);
+              const data = await response.json();
+              if (!Array.isArray(data.plans))
+                throw Error("Invalid data: " + endpoint);
+              return data.plans.map((p) =>
+                normalize(
+                  p,
+                  "advertised_price_paise" in p ? "provider" : "legacy",
+                ),
+              );
+            }),
+          );
+          const errors = [];
+          results.forEach((result, i) => {
+            if (result.status === "fulfilled")
+              cachedSources.set(endpoints[i], result.value);
+            else errors.push(result.reason.message);
+          });
+          plans = [...cachedSources.values()].flat();
+          selected = new Set(
+            [...selected].filter((k) => plans.some((p) => p.key === k)),
+          );
+          $("errors").textContent = errors.length
+            ? "Update failed for " +
+              errors.join("; ") +
+              ". Previously loaded records are kept and may be stale."
+            : "";
+          $("last-sync").textContent =
+            (errors.length
+              ? "Partial update checked: "
+              : "Database checked: ") + new Date().toLocaleTimeString();
+          render();
+        } finally {
+          loading = false;
+          $("refresh").disabled = false;
+        }
+      }
+      for (const id of ["provider", "search", "speed", "budget", "sort"])
+        $(id).addEventListener("input", render);
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-key]");
+        if (!b) return;
+        const k = b.dataset.key;
+        if (selected.has(k)) selected.delete(k);
+        else if (selected.size < 3) selected.add(k);
+        else {
+          alert("Select up to three plans. Remove one to choose another.");
+          return;
+        }
+        render();
+      });
+      $("clear").onclick = () => {
+        selected.clear();
+        render();
+      };
+      $("reset").onclick = () => {
+        for (const id of ["provider", "search", "budget"]) $(id).value = "";
+        $("speed").value = "0";
+        $("sort").value = "provider";
+        render();
+      };
+      async function checkDatabase() {
+        $("db-content").textContent = "Checking saved database…";
+        try {
+          const response = await fetch("/database-status", {
+            cache: "no-store",
+            signal: AbortSignal.timeout(10000),
+          });
+          if (!response.ok) throw Error("HTTP " + response.status);
+          const d = await response.json();
+          if (!d.exists) {
+            $("db-content").textContent =
+              "Database file not found: " + d.database_path;
+            return;
+          }
+          $("db-content").innerHTML =
+            '<p>SQLite file used by this running backend:</p><div class="db-path">' +
+            esc(d.database_path) +
+            "</div><p>" +
+            d.total +
+            " stored records · " +
+            new Intl.NumberFormat().format(d.size_bytes) +
+            " bytes</p><table><thead><tr><th>Table</th><th>Provider</th><th>Records</th><th>Latest capture</th></tr></thead><tbody>" +
+            d.tables
+              .flatMap((t) =>
+                t.providers.map(
+                  (p) =>
+                    "<tr><td>" +
+                    esc(t.name) +
+                    "</td><td>" +
+                    esc(p.provider) +
+                    "</td><td>" +
+                    p.count +
+                    "</td><td>" +
+                    esc(
+                      p.last_scraped
+                        ? new Date(p.last_scraped).toLocaleString()
+                        : "Unknown",
+                    ) +
+                    "</td></tr>",
+                ),
+              )
+              .join("") +
+            "</tbody></table><p>Refresh reads saved records. Run the provider scraper to update them. Capture times change only after a scraper successfully commits to the database.</p>";
+        } catch (e) {
+          $("db-content").textContent =
+            "Could not inspect database: " +
+            e.message +
+            ". Use the updated api.py from this package.";
+        }
+      }
+      function renderVerizon(data) {
+        verizonResult = data;
+        const root = $("verizon-result");
+        if (!data || data.found === false) {
+          root.textContent = data?.message || "No saved Verizon result for this address.";
+          return;
+        }
+        const plans = Array.isArray(data.plans) ? data.plans : [];
+        const planCards = plans.map((plan) => {
+          const price = plan.monthly_price ?? plan.monthly_price_usd;
+          const priceText = price == null ? "Price not captured" : "$" + Number(price).toFixed(2) + " advertised";
+          const bundle = plan.mobile_bundle_price_usd == null ? "" : `<div class="verizon-muted">As low as $${Number(plan.mobile_bundle_price_usd).toFixed(2)}/month with eligible mobile bundle</div>`;
+          const labelPrice = plan.broadband_label_monthly_price_usd == null ? "" : `<div class="verizon-muted">Broadband Facts price before discounts: $${Number(plan.broadband_label_monthly_price_usd).toFixed(2)}/month</div>`;
+          return `<article class="verizon-plan"><span class="verizon-status">${plan.address_confirmed ? "address confirmed" : "candidate · review required"}</span><strong>${esc(plan.name || "Verizon home internet offer")}</strong><div>${esc(priceText)} / month</div><div>Up to ${esc(plan.speed || "Speed not captured")}</div>${plan.typical_download_speed ? `<div class="verizon-muted">Typical download: ${esc(plan.typical_download_speed)}</div>` : ""}${bundle}${labelPrice}${plan.price_conditions ? `<details><summary>Price conditions</summary><p>${esc(plan.price_conditions)}</p></details>` : ""}</article>`;
+        }).join("");
+        root.innerHTML = `<span class="verizon-status">${esc(String(data.status || "unknown").replaceAll("_", " "))}</span><p>${esc(data.message || "No additional result details.")}</p><div class="verizon-muted">Requested address: ${esc(data.address || "")}${data.resolved_address ? `<br>Verizon service address: ${esc(data.resolved_address)}` : ""}<br>Checked: ${esc(data.checked_at ? new Date(data.checked_at).toLocaleString() : "Unknown")} · ${esc(data.source_url || "")}</div>` +
+          (plans.length ? `<div class="verizon-plans">${planCards}</div>` : "<p>No plans were captured for this lookup.</p>");
+      }
+      function verizonLookupAddress() {
+        const address = $("verizon-address").value.trim();
+        const zip = $("verizon-zip").value.trim();
+        return zip && !address.includes(zip)
+          ? address + ", " + zip
+          : address;
+      }
+      async function checkVerizonAddress(event) {
+        event.preventDefault();
+        const address = $("verizon-address").value.trim();
+        const zip = $("verizon-zip").value.trim();
+        const button = $("verizon-submit");
+        if (address.length < 5) return;
+        button.disabled = true;
+        $("verizon-result").textContent = "Checking the address with Verizon. This can take up to a few minutes; keep this page open.";
+        try {
+          const response = await fetch("/verizon/check", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ address, zip_code: zip || null, wait_seconds: 90 }),
+            cache: "no-store",
+            signal: AbortSignal.timeout(180000),
+          });
+          const data = await response.json();
+          if (!response.ok) throw Error(data.detail || `HTTP ${response.status}`);
+          renderVerizon(data);
+          await checkDatabase();
+        } catch (error) {
+          $("verizon-result").textContent = "Verizon lookup failed: " + error.message + ". The server may still be running the browser check; use Load saved result after it finishes.";
+        } finally {
+          button.disabled = false;
+        }
+      }
+      async function loadSavedVerizon() {
+        const address = verizonLookupAddress();
+        if (address.length < 5) {
+          $("verizon-result").textContent = "Enter the same address used for a previous check.";
+          return;
+        }
+        $("verizon-result").textContent = "Loading the latest saved address result…";
+        try {
+          const response = await fetch("/verizon/results?address=" + encodeURIComponent(address), {
+            cache: "no-store",
+            signal: AbortSignal.timeout(15000),
+          });
+          const data = await response.json();
+          if (!response.ok) throw Error(data.detail || `HTTP ${response.status}`);
+          renderVerizon(data);
+        } catch (error) {
+          $("verizon-result").textContent = "Could not load saved result: " + error.message;
+        }
+      }
+      $("verizon-form").addEventListener("submit", checkVerizonAddress);
+      $("verizon-saved").addEventListener("click", loadSavedVerizon);
+      $("db-check").onclick = () => {
+        $("db-panel").open = true;
+        checkDatabase();
+      };
+      $("jump-compare").onclick = () =>
+        $("compare").scrollIntoView({ behavior: "smooth" });
+      $("export").onclick = () => {
+        const cell = (v) => '"' + String(v ?? "").replaceAll('"', '""') + '"';
+        const rows = [
+          [
+            "provider",
+            "pack",
+            "advertised_price_inr",
+            "speed_mbps",
+            "billing_or_validity",
+            "city",
+            "scraped_at",
+            "source_url",
+          ],
+          ...plans.map((p) => [
+            p.provider,
+            p.name,
+            p.price,
+            p.speed,
+            p.period,
+            p.city,
+            p.date,
+            p.source,
+          ]),
+        ];
+        const csv = rows
+          .map((r) =>
+            r
+              .map((v) =>
+                cell(/^[=+@\-\t\r]/.test(String(v ?? "")) ? "'" + v : v),
+              )
+              .join(","),
+          )
+          .join("\r\n");
+        const url = URL.createObjectURL(
+          new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" }),
+        );
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "saved-broadband-plans.csv";
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      };
+      $("refresh").onclick = () => {
+        load();
+        checkDatabase();
+      };
+      load();
+      checkDatabase();
+      setInterval(() => {
+        if (!document.hidden) {
+          load();
+          if ($("db-panel").open) checkDatabase();
+        }
+      }, 5000);
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          load();
+          checkDatabase();
+        }
+      });
+    </script>
+  </body>
+</html>

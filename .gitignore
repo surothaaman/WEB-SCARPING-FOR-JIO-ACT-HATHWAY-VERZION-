@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+captures/
+logs/
+*.db
+*.db-*
+*_page.html
+*_page_text.txt
+*_controls.json
